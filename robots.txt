@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://briomusicstudio.github.io/keyboard-adults/sitemap.xml

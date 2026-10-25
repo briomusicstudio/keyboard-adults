@@ -3,9 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Brio · Клавіатура фортепіано</title>
+<title>Brio Music Studio — інтерактивна клавіатура фортепіано</title>
+<meta name="description" content="Інтерактивний тренажер для вивчення клавіатури фортепіано: групи чорних клавіш, ноти, октави та ігри для практики. Українською, російською й англійською.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="googlebot" content="index,follow,max-image-preview:large">
+<meta name="application-name" content="Brio Music Studio">
+<meta name="color-scheme" content="light">
 <meta name="theme-color" content="#fbf8fd">
+<link rel="canonical" href="https://briomusicstudio.github.io/keyboard-adults/">
 <link rel="icon" href="brio-logo.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="https://briomusicstudio.github.io/keyboard-adults/sitemap.xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Brio Music Studio">
+<meta property="og:title" content="Brio Music Studio — інтерактивна клавіатура фортепіано">
+<meta property="og:description" content="Інтерактивний тренажер для вивчення клавіатури фортепіано: групи чорних клавіш, ноти, октави та ігри для практики.">
+<meta property="og:url" content="https://briomusicstudio.github.io/keyboard-adults/">
+<meta property="og:image" content="https://briomusicstudio.github.io/keyboard-adults/og-image.png">
+<meta property="og:image:secure_url" content="https://briomusicstudio.github.io/keyboard-adults/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Brio Music Studio — інтерактивне вивчення клавіатури фортепіано">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Brio Music Studio — інтерактивна клавіатура фортепіано">
+<meta name="twitter:description" content="Вивчайте групи чорних клавіш, ноти й октави та тренуйтеся в інтерактивних іграх.">
+<meta name="twitter:image" content="https://briomusicstudio.github.io/keyboard-adults/og-image.png">
+<meta name="twitter:image:alt" content="Brio Music Studio — інтерактивне вивчення клавіатури фортепіано">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Brio Music Studio — інтерактивна клавіатура фортепіано",
+  "url": "https://briomusicstudio.github.io/keyboard-adults/",
+  "description": "Інтерактивний навчальний застосунок для вивчення клавіатури фортепіано, нот і октав.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "inLanguage": ["uk", "ru", "en"],
+  "image": "https://briomusicstudio.github.io/keyboard-adults/og-image.png"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Playfair+Display:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
@@ -67,14 +106,15 @@ h1{font-size:clamp(2.1rem,4.6vw + .6rem,4rem);margin-bottom:20px}
 .games{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:24px}
 .gc{text-align:left;display:grid;gap:6px;padding:24px;cursor:pointer;font:inherit;transition:transform .2s}
 .gc:hover{transform:translateY(-4px)}.gc b{font:700 1.25rem "Playfair Display",serif}.gc i{font:700 1rem "Playfair Display",serif;font-style:normal;letter-spacing:.14em;color:#8b5cf6}.gc span{color:var(--mut);font-size:.95em}
-.kb{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:2px;height:clamp(150px,30vw,250px);background:var(--ink);border:3px solid var(--ink);border-radius:6px 6px 16px 16px;overflow:hidden}
-.wk{border:0;background:#fff;border-radius:0 0 10px 10px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;cursor:pointer;position:relative}
-.wk[data-s]:not(.full)::before{content:"";width:clamp(30px,5vw,44px);aspect-ratio:1;border:2px dashed #1f1d2b55;border-radius:50%}
+.kb{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;height:clamp(150px,30vw,250px);background:var(--ink);border:3px solid var(--ink);border-radius:6px 6px 16px 16px;overflow:hidden;min-width:0;width:100%}
+.wk{min-width:0;border:0;background:#fff;border-radius:0 0 10px 10px;display:flex;align-items:flex-end;justify-content:center;padding:0 1px 10px;cursor:pointer;position:relative}
+.wk[data-s]:not(.full)::before{content:"";width:min(100%,clamp(22px,8vw,44px));aspect-ratio:1;border:2px dashed #1f1d2b55;border-radius:50%}
 .bk{position:absolute;top:0;left:calc(var(--p)/7*100% - 4.2%);width:8.4%;height:58%;background:linear-gradient(#3b3750,var(--ink));border-radius:0 0 7px 7px;box-shadow:inset 0 -6px 0 #4b4660;pointer-events:none}
 .kb.pk{height:clamp(150px,26vw,230px)}.pk .wk{padding-bottom:16px}.pk .bk{height:52%}
 .nb{display:grid;place-items:center;width:clamp(46px,7vw,58px);aspect-ratio:1;border-radius:50%;background:var(--c);box-shadow:0 5px 14px -4px #1f1d2b55;font:800 clamp(.8rem,2vw,1.02rem) Manrope,sans-serif}
 .wk .nb{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
 .pk .wk .nb{width:clamp(30px,6vw,44px);font-size:clamp(.55rem,1.7vw,.85rem);box-shadow:none;animation:none}
+.kb:not(.pk) .wk .nb{width:min(100%,clamp(26px,12vw,58px));font-size:clamp(.5rem,3vw,.95rem);box-shadow:none}
 .gh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:18px}
 .gh h2{font-size:clamp(1.7rem,3.4vw,2.5rem);margin-bottom:6px}.gh p{max-width:46em;color:#3b3850}
 .tray{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:center;align-items:center;padding:16px 20px;margin-bottom:26px}
@@ -100,6 +140,7 @@ body.arm .wk[data-s]:not(.full),body.arm .rs:not(.full){outline:2px dashed #6d4a
 .sc{position:relative;display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 6px 24px;scrollbar-width:thin;scrollbar-color:#8b5cf6 transparent}
 .oc{flex:0 0 min(88%,460px);scroll-snap-align:center;padding:clamp(16px,3vw,24px)}
 .oc.done::before{content:"✓";position:absolute;top:14px;right:16px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#e8f6f0;color:#31856a;font-weight:800;animation:feedback-pop .35s ease-out both}
+@media(max-width:700px){.nv{display:none}.sc{display:grid;overflow:visible;scroll-snap-type:none;padding:6px 0 24px}.oc{width:100%;min-width:0;flex:none;scroll-snap-align:none}}
 .oh{display:flex;align-items:center;gap:12px;margin-bottom:12px}.oh h3{font-size:1.3rem}
 .sci{font:800 .78rem Manrope;padding:.2em .8em;border-radius:999px;background:#6d4aff1a;color:#5a38e6}
 .oc .kb{height:clamp(130px,26vw,190px)}.oc .roofs{height:clamp(52px,11vw,80px)}
@@ -269,6 +310,11 @@ i4:'Look at the marked key and choose the right note name. Rely on the groups of
 i5:'Find the requested note on the keyboard. Seven notes, seven questions.',
 q4:'Which note is it?',q5:'Find the note',w1:'Everything is in its place.',w2:'All seven octaves are filled.',w3:'All pairs found.',w4:'Every note named correctly.',w5:'Every note found.',
 tr:'Roofs',tn:'Notes',win:'Well done',again:'Again',ok:'Next',easy:'Easy',all:'All notes',moves:'Moves',au:'Author',nm:'Mariana Vykhryst',oct:'octave'}};
+const SEO={
+  uk:{title:'Brio Music Studio — інтерактивна клавіатура фортепіано',description:'Інтерактивний тренажер для вивчення клавіатури фортепіано: групи чорних клавіш, ноти, октави та ігри для практики. Українською, російською й англійською.',ogDescription:'Інтерактивний тренажер для вивчення клавіатури фортепіано: групи чорних клавіш, ноти, октави та ігри для практики.',locale:'uk_UA'},
+  ru:{title:'Brio Music Studio — интерактивная клавиатура фортепиано',description:'Интерактивный тренажёр для изучения клавиатуры фортепиано: группы чёрных клавиш, ноты, октавы и игры для практики. На украинском, русском и английском языках.',ogDescription:'Интерактивный тренажёр для изучения клавиатуры фортепиано: группы чёрных клавиш, ноты, октавы и игры для практики.',locale:'ru_RU'},
+  en:{title:'Brio Music Studio — Interactive Piano Keyboard',description:'An interactive piano keyboard learning app: explore black-key groups, learn notes and octaves, and practise with games. Available in Ukrainian, Russian and English.',ogDescription:'Learn piano keys, note names and octaves with interactive lessons and practice games.',locale:'en_US'}
+};
 const NN={uk:['До','Ре','Мі','Фа','Соль','Ля','Сі'],ru:['До','Ре','Ми','Фа','Соль','Ля','Си'],en:['DO','RE','MI','FA','SOL','LA','SI']};
 const ANN={uk:['Велика','Мала','Перша','Друга','Третя','Четверта',"П’ята"],ru:['Большая','Малая','Первая','Вторая','Третья','Четвёртая','Пятая'],en:['Great','Small','One-lined','Two-lined','Three-lined','Four-lined','Five-lined']};
 const SCI=['C2','C3','C4','C5','C6','C7','C8'];
@@ -488,7 +534,13 @@ function go(i){
   document.startViewTransition&&!reduce?document.startViewTransition(sw):sw();
 }
 function applyLang(){
-  T=L[lang];document.documentElement.lang=lang;document.title='Brio · '+T.h1.replace(':','');
+  T=L[lang];document.documentElement.lang=lang;document.title=SEO[lang].title;
+  $('meta[name="description"]').content=SEO[lang].description;
+  $('meta[property="og:title"]').content=SEO[lang].title;
+  $('meta[property="og:description"]').content=SEO[lang].ogDescription;
+  $('meta[property="og:locale"]').content=SEO[lang].locale;
+  $('meta[name="twitter:title"]').content=SEO[lang].title;
+  $('meta[name="twitter:description"]').content=SEO[lang].ogDescription;
   $$('[data-x]').forEach(e=>e.textContent=T[e.dataset.x]);
   $$('[data-nl]').forEach(e=>e.textContent=NN[lang][+e.dataset.nl]);
   $$('[data-an]').forEach(e=>e.textContent=ANN[lang][+e.dataset.an]+' '+T.oct);
