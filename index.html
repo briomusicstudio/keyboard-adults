@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Brio · Клавіатура фортепіано</title>
+<meta name="theme-color" content="#fbf8fd">
+<link rel="icon" href="brio-logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Playfair+Display:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--ink:#1f1d2b;--mut:#5d5a70;--bg:#fbf8fd;--grad:linear-gradient(120deg,#d63384,#6d4aff)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{overflow-x:clip}
+body{font:500 clamp(15px,.5vw + 13px,17.5px)/1.65 Manrope,system-ui,sans-serif;color:var(--ink);background:var(--bg);min-height:100dvh;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(48vw 44vw at 4% 2%,#ffbfd8cc,transparent 70%),radial-gradient(42vw 42vw at 98% 8%,#b7d6ffcc,transparent 70%),radial-gradient(52vw 40vw at 88% 98%,#ffd1b8cc,transparent 70%),radial-gradient(42vw 46vw at 2% 92%,#d3c4ffcc,transparent 70%)}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:700;line-height:1.15}
+:focus-visible{outline:3px solid #6d4aff;outline-offset:3px}
+button{font:inherit;color:inherit}
+.gt{background:linear-gradient(100deg,#8b5cf6 0%,#ec4899 55%,#ff7a59 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-bottom:.1em}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:max(12px,env(safe-area-inset-top)) clamp(14px,4vw,40px) 4px;max-width:1180px;margin:auto}
+.brand{background:none;border:0;cursor:pointer;display:block}.brand img{height:42px;width:auto;display:block}
+.lang{display:flex;gap:2px;background:#ffffffcc;border:1px solid #fff;border-radius:999px;padding:3px;box-shadow:0 6px 20px -8px #4a2f8a33}
+.lang button{border:0;background:none;border-radius:999px;padding:5px 13px;font:800 .8rem Manrope,sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:#fff}
+main{max-width:1180px;margin:auto;padding:12px clamp(14px,4vw,40px)}
+section[hidden]{display:none}
+.card{position:relative;isolation:isolate;border-radius:26px;border:1px solid #ffffffd9;box-shadow:0 12px 40px -14px #4a2f8a2e}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;background:#ffffffdb}
+.gl::before{content:"";position:absolute;inset:-70px;z-index:-2;background:var(--gl);filter:blur(48px);pointer-events:none}
+@media(max-width:700px){.gl::before{inset:-40px;filter:blur(36px)}}
+.g1{--gl:radial-gradient(38% 45% at 12% 92%,#c4a6ff,transparent 72%),radial-gradient(34% 40% at 98% 45%,#8ccbff,transparent 72%)}
+.g2{--gl:radial-gradient(60% 42% at 50% 100%,#ffae88,transparent 72%),radial-gradient(30% 35% at 4% 10%,#ffb3d1,transparent 72%)}
+.g3{--gl:radial-gradient(40% 50% at 92% 8%,#ffa3c8,transparent 72%),radial-gradient(40% 45% at 6% 82%,#b7a2ff,transparent 72%)}
+.g4{--gl:radial-gradient(46% 50% at 50% 104%,#9dd4ff,transparent 72%),radial-gradient(30% 40% at 100% 90%,#ffc4a1,transparent 72%)}
+.btn{border:0;background:var(--grad);color:#fff;font:800 1rem Manrope,sans-serif;padding:.8em 1.7em;border-radius:999px;box-shadow:0 12px 26px -10px #7a2fd0aa;cursor:pointer;transition:transform .15s,filter .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 16px 30px -10px #7a2fd0cc}
+.btn:active{transform:none}
+.btn.sm{padding:.45em 1.1em;font-size:.9rem}.btn.alt{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px #1f1d2b40}
+.btn.alt:hover{box-shadow:inset 0 0 0 1.5px #6d4aff}
+.hero{position:relative;display:grid;gap:40px;align-items:center;padding:clamp(20px,5vw,56px) 0 36px}
+.hero::before{content:"";position:absolute;inset:-80px -40px;z-index:-1;pointer-events:none;filter:blur(70px);background:radial-gradient(34% 50% at 14% 30%,#ffa9cb,transparent 70%),radial-gradient(30% 44% at 62% 12%,#c3b0ff,transparent 70%),radial-gradient(34% 46% at 92% 78%,#ffb99b,transparent 70%),radial-gradient(28% 40% at 50% 100%,#9fd3ff,transparent 70%)}
+@media(min-width:900px){.hero{grid-template-columns:1fr 1fr}}
+h1{font-size:clamp(2.1rem,4.6vw + .6rem,4rem);margin-bottom:20px}
+.ht p{font-size:1.1em;margin-bottom:26px;max-width:34em;color:#3b3850}
+.hp{padding:clamp(16px,3vw,28px)}
+.grpl{position:relative;height:50px;margin:0 3px}
+.gb{position:absolute;bottom:0;height:16px;border:2px solid #ec4899;border-bottom:0;border-radius:12px 12px 0 0}
+.gb.v{border-color:#8b5cf6}
+.gb b{position:absolute;left:50%;bottom:20px;translate:-50% 0;font:700 1.35rem "Playfair Display",serif;line-height:1}
+.cap{text-align:center;font-size:.9rem;color:var(--mut);margin-top:12px}
+.story{display:grid;gap:30px;margin:8px 0 56px;counter-reset:c}
+.cp{counter-increment:c;display:grid;gap:22px;align-items:center;padding:clamp(22px,3.4vw,38px)}
+.num{display:block;font:700 1.1rem "Playfair Display",serif;letter-spacing:.12em;color:#8b5cf6;margin-bottom:6px}.num::before{content:counter(c,decimal-leading-zero)}
+.cp h3{font-size:clamp(1.45rem,2.8vw,2rem);margin-bottom:10px}
+.cp p{max-width:32em}
+.ex{margin-top:14px;padding-left:14px;border-left:3px solid #c4a6ff;font-size:.95em;color:var(--mut)}
+.ci{display:grid;justify-items:center;gap:12px}
+.ci .mk,.ci .rr{width:100%;max-width:440px}.ci .mk{height:clamp(110px,18vw,150px)}
+.rr{display:flex;height:clamp(40px,8vw,62px);margin-bottom:-4px}.rr span{position:relative;display:block}
+.mk.g b:nth-of-type(-n+2){background:#ec4899}.mk.g b:nth-of-type(n+3){background:#8b5cf6}
+.octs{display:grid;gap:10px;width:100%;max-width:440px}.octs>div{display:flex;align-items:center;gap:12px}
+.octs .mk{height:64px;width:auto;flex:1}.octs small{font:800 .85rem Manrope;color:#6d4aff;min-width:2.4em}
+.mk.labels i{display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font:800 clamp(.45rem,1.5vw,.7rem) Manrope,sans-serif;color:var(--ink);white-space:nowrap}
+@media(min-width:800px){.cp{grid-template-columns:1.1fr .9fr}.cp:nth-child(even) .ci{order:-1}}
+.sh{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:22px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:24px}
+.gc{text-align:left;display:grid;gap:6px;padding:24px;cursor:pointer;font:inherit;transition:transform .2s}
+.gc:hover{transform:translateY(-4px)}.gc b{font:700 1.25rem "Playfair Display",serif}.gc i{font:700 1rem "Playfair Display",serif;font-style:normal;letter-spacing:.14em;color:#8b5cf6}.gc span{color:var(--mut);font-size:.95em}
+.kb{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:2px;height:clamp(150px,30vw,250px);background:var(--ink);border:3px solid var(--ink);border-radius:6px 6px 16px 16px;overflow:hidden}
+.wk{border:0;background:#fff;border-radius:0 0 10px 10px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;cursor:pointer;position:relative}
+.wk[data-s]:not(.full)::before{content:"";width:clamp(30px,5vw,44px);aspect-ratio:1;border:2px dashed #1f1d2b55;border-radius:50%}
+.bk{position:absolute;top:0;left:calc(var(--p)/7*100% - 4.2%);width:8.4%;height:58%;background:linear-gradient(#3b3750,var(--ink));border-radius:0 0 7px 7px;box-shadow:inset 0 -6px 0 #4b4660;pointer-events:none}
+.kb.pk{height:clamp(150px,26vw,230px)}.pk .wk{padding-bottom:16px}.pk .bk{height:52%}
+.nb{display:grid;place-items:center;width:clamp(46px,7vw,58px);aspect-ratio:1;border-radius:50%;background:var(--c);box-shadow:0 5px 14px -4px #1f1d2b55;font:800 clamp(.8rem,2vw,1.02rem) Manrope,sans-serif}
+.wk .nb{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
+.pk .wk .nb{width:clamp(30px,6vw,44px);font-size:clamp(.55rem,1.7vw,.85rem);box-shadow:none;animation:none}
+.gh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:18px}
+.gh h2{font-size:clamp(1.7rem,3.4vw,2.5rem);margin-bottom:6px}.gh p{max-width:46em;color:#3b3850}
+.tray{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:center;align-items:center;padding:16px 20px;margin-bottom:26px}
+.grp{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}.grp small{font:800 .72rem Manrope;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
+.tok{position:relative;border:0;background:none;padding:0;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;transition:translate .15s}
+.tok:hover{translate:0 -3px}.tok[disabled]{opacity:.3;filter:grayscale(1);cursor:default}
+.tok.on{outline:2px dashed #6d4aff;outline-offset:5px;border-radius:18px}.tok.lift{opacity:.35}
+.tok.r2{width:96px;height:48px}.tok.r3{width:128px;height:48px}
+.ghost{position:fixed;left:0;top:0;margin:-28px 0 0 -28px;pointer-events:none;z-index:99;scale:1.12;rotate:-4deg;filter:drop-shadow(0 10px 14px #4a2f8a55)}
+.bd{position:absolute;top:-9px;right:-9px;min-width:24px;height:24px;padding:0 5px;background:var(--ink);color:#fff;border-radius:12px;font:800 .75rem Manrope,sans-serif;display:grid;place-items:center;font-style:normal}
+.board{padding:clamp(16px,3vw,32px)}
+.roofs{position:relative;height:clamp(58px,13vw,100px);margin-bottom:-3px}
+.rs{position:absolute;bottom:0;height:100%;border:0;background:none;padding:0 3px}
+.rf{width:100%;height:100%;display:block}
+.rb{fill:var(--c);stroke:#1f1d2b55;stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.dots{position:absolute;left:50%;bottom:16%;translate:-50% 0;letter-spacing:.2em;font-size:clamp(.55rem,1.8vw,.95rem);color:var(--ink)}
+.rs:not(.full) .rf{opacity:.35;filter:grayscale(.7)}.rs:not(.full) .rb{stroke-dasharray:6 5}.rs:not(.full) .dots{opacity:.4}
+.rs.full .rf{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+body.arm .wk[data-s]:not(.full),body.arm .rs:not(.full){outline:2px dashed #6d4aff;outline-offset:-3px}
+.hint{outline:4px solid #6d4aff!important;animation:hp .5s 3}
+.shake{animation:miss .35s}
+.nv{display:flex;gap:10px;justify-content:flex-end;margin-bottom:10px}
+.sc{position:relative;display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 6px 24px;scrollbar-width:thin;scrollbar-color:#8b5cf6 transparent}
+.oc{flex:0 0 min(88%,460px);scroll-snap-align:center;padding:clamp(16px,3vw,24px)}
+.oc.done::before{content:"✓";position:absolute;top:14px;right:16px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#e8f6f0;color:#31856a;font-weight:800;animation:feedback-pop .35s ease-out both}
+.oh{display:flex;align-items:center;gap:12px;margin-bottom:12px}.oh h3{font-size:1.3rem}
+.sci{font:800 .78rem Manrope;padding:.2em .8em;border-radius:999px;background:#6d4aff1a;color:#5a38e6}
+.oc .kb{height:clamp(130px,26vw,190px)}.oc .roofs{height:clamp(52px,11vw,80px)}
+.bar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:20px}.seg{display:flex;gap:8px}.mv{font:700 1.1rem "Playfair Display",serif}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(74px,19vw,128px),1fr));gap:clamp(8px,2vw,16px);max-width:780px;margin:auto}
+.mc{perspective:600px;aspect-ratio:3/4;border:0;background:none;padding:0;cursor:pointer}
+.mi{position:relative;display:block;height:100%;transform-style:preserve-3d;transition:transform .45s}.mc.up .mi{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;display:grid;place-items:center;box-shadow:0 10px 24px -10px #4a2f8a66}
+.fa{background:linear-gradient(145deg,#c6b2ff,#ffb0cf);color:#fff;font-size:2rem}.fb{background:#fff;transform:rotateY(180deg)}
+.mc.ok .fb{background:#f1faf6;box-shadow:0 0 0 2px #8fcdb4}.mc{position:relative}
+.mc.ok::after,.mc.miss::after{position:absolute;top:5px;right:5px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 1rem Manrope,sans-serif;animation:feedback-pop .3s ease-out both}
+.mc.ok::after{content:"✓";background:#e8f6f0;color:#31856a}.mc.miss::after{content:"×";background:#fff2ef;color:#bd746b}
+.fb .nb{width:62%;font-size:clamp(.8rem,3vw,1.3rem)}
+.mk{position:relative;display:grid;grid-template-columns:repeat(7,1fr);width:86%;height:62%;border:2px solid var(--ink);border-radius:6px 6px 12px 12px;overflow:hidden;background:var(--ink);gap:1.5px}
+.mk i{background:#fff}.mk i.on{background:var(--c)}.mk b{position:absolute;top:0;left:calc(var(--p)/7*100% - 4.5%);width:9%;height:58%;background:var(--ink);border-radius:0 0 3px 3px}
+.q{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:16px 20px;margin-bottom:20px;font:700 clamp(1.3rem,3.4vw,1.9rem) "Playfair Display",serif}
+.q .nb{width:clamp(60px,10vw,80px);font-size:clamp(1.1rem,3vw,1.5rem)}
+.pd{display:flex;gap:8px;justify-content:center;margin-bottom:18px}.pd i{width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #1f1d2b44}.pd i.on{background:linear-gradient(135deg,#2fd3a4,#27b6c9);box-shadow:none}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:560px;margin:24px auto 0}
+@media(min-width:640px){.opts{grid-template-columns:repeat(4,1fr);max-width:none}}
+.opt{background:#fff;border:0;border-radius:22px;padding:16px;box-shadow:0 10px 24px -12px #4a2f8a66,inset 0 0 0 1.5px #1f1d2b1a;cursor:pointer;display:grid;place-items:center;transition:transform .15s,box-shadow .15s}
+.opt:hover{transform:translateY(-3px);box-shadow:0 14px 28px -12px #4a2f8a88,inset 0 0 0 1.5px #6d4aff}
+.opt .nb{width:clamp(56px,10vw,76px);font-size:clamp(1rem,2.6vw,1.4rem)}
+.opt{position:relative}
+.opt.bad,.opt.good{pointer-events:none}
+.opt.bad{opacity:.72;box-shadow:inset 0 0 0 1.5px #d9a19a}
+.opt.good{box-shadow:inset 0 0 0 2px #8fcdb4;background:#f6fbf8}
+.opt.bad::after,.opt.good::after{position:absolute;top:7px;right:7px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 1rem Manrope,sans-serif;animation:feedback-pop .3s ease-out both}
+.opt.bad::after{content:"×";background:#fff2ef;color:#bd746b}.opt.good::after{content:"✓";background:#e8f6f0;color:#31856a}
+.wk.mark{background:#f3edff}.wk.mark::after{content:"";width:clamp(14px,3vw,22px);aspect-ratio:1;border-radius:50%;background:var(--grad);animation:hp 1s ease-in-out infinite}
+.fx{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:5}
+.fx b{display:grid;place-items:center;width:clamp(64px,14vw,82px);aspect-ratio:1;border:1px solid #ffffffc9;border-radius:50%;font:700 clamp(2rem,6vw,2.7rem)/1 Manrope,sans-serif;animation:feedback-pop .3s ease-out both,feedback-fade .35s 0.55s ease-in forwards}
+.fx.ok b{background:#e8f6f0;color:#31856a;box-shadow:0 8px 24px #1f1d2b1c}.fx.no b{background:#fff2ef;color:#bd746b;box-shadow:0 8px 24px #1f1d2b1c}
+footer{max-width:1180px;margin:40px auto 0;padding:24px clamp(14px,4vw,40px) 130px;display:grid;justify-items:center;gap:16px;text-align:center}
+footer img{height:60px;width:auto}
+.soc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.soc a{font:800 .85rem Manrope,sans-serif;color:var(--ink);text-decoration:none;background:#ffffffcc;border-radius:999px;padding:.5em 1.2em;box-shadow:inset 0 0 0 1.5px #1f1d2b33;transition:transform .15s,box-shadow .15s}
+.soc a:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 1.5px #6d4aff}
+footer small{color:var(--mut)}
+.dock{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:30;display:flex;gap:4px;padding:6px;background:#ffffffd9;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #fff;border-radius:26px;box-shadow:0 14px 40px -12px #4a2f8a55;max-width:calc(100vw - 16px)}
+.tab{flex:1 1 0;min-width:0;border:0;background:none;border-radius:20px;padding:7px 3px;display:grid;justify-items:center;align-content:start;gap:2px;font:700 10px/1.15 Manrope,sans-serif;cursor:pointer;text-align:center;transition:background .2s}.tab span{overflow-wrap:anywhere}
+.tab i{font:700 17px "Playfair Display",serif;font-style:normal;line-height:1.1}
+.tab:hover{background:#6d4aff14}.tab[aria-current=page]{background:var(--grad);color:#fff}
+@media(min-width:640px){.tab{grid-auto-flow:column;align-items:center;align-content:center;font-size:13px;gap:8px;padding:10px 14px}}
+@media(max-width:899px){.dock{width:calc(100vw - 16px)}}
+dialog{border:0;border-radius:30px;box-shadow:0 30px 80px -20px #4a2f8a88;padding:clamp(26px,5vw,42px);margin:auto;width:min(92vw,440px);text-align:center;background:#fff;overflow:hidden;position:relative;isolation:isolate;color:var(--ink)}
+dialog[open]{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+dialog::backdrop{background:#1f1d2b88;backdrop-filter:blur(5px)}
+.burst{position:absolute;inset:-20%;z-index:-1;filter:blur(34px);background:radial-gradient(40% 40% at 18% 88%,#ffb0d0,transparent 70%),radial-gradient(40% 40% at 88% 80%,#a8c8ff,transparent 70%),radial-gradient(40% 40% at 62% 4%,#d5c4ff,transparent 70%)}
+.wm{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(135deg,#2fd3a4,#27b6c9);color:#fff;font:800 2rem Manrope;box-shadow:0 0 50px #2fd3a488}
+dialog h2{font-size:clamp(1.7rem,6vw,2.3rem);margin:4px 0 8px}dialog p{font-size:1.05em;margin-bottom:24px;color:#3b3850}
+dialog form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+#cfx{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:none;overflow:hidden;pointer-events:none}
+.cf{position:absolute;top:0;font:800 20px Manrope,sans-serif}
+@keyframes pop{0%{scale:.2;opacity:0}100%{scale:1;opacity:1}}
+@keyframes shake{25%{translate:-7px}75%{translate:7px}}
+@keyframes hp{50%{scale:1.07}}
+@keyframes miss{50%{box-shadow:inset 0 0 0 2px #d9a19a}}
+@keyframes feedback-pop{from{scale:.86;opacity:0}to{scale:1;opacity:1}}
+@keyframes feedback-fade{to{opacity:0}}
+@media(prefers-reduced-motion:reduce){.wk .nb,.rs.full .rf,dialog[open],.hint,.mc.ok,.gok,.gno{animation:none}.mi{transition:none}.tok,.btn,.gc,.opt{transition:none}.fx b,.mc.ok::after,.mc.miss::after,.opt.bad::after,.opt.good::after,.oc.done::before{animation:none}.wk.mark::after{animation:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="brand" data-go="0" aria-label="Brio Music Studio"><img src="brio-logo.svg" alt="Brio Music Studio"></button>
+  <div class="lang" role="group" aria-label="Language"><button data-l="uk">UA</button><button data-l="ru">RU</button><button data-l="en">EN</button></div>
+</header>
+<main>
+  <section id="p0">
+    <div class="hero">
+      <div class="ht">
+        <h1><span data-x="h1"></span> <span class="gt" data-x="h2"></span></h1>
+        <p data-x="sub"></p>
+        <button class="btn" data-go="1"><span data-x="cta"></span> →</button>
+      </div>
+      <div class="card hp gl g3">
+        <div class="grpl"><span class="gb" style="left:10.1%;width:22.7%"><b class="gt">2</b></span><span class="gb v" style="left:52.9%;width:37%"><b class="gt">3</b></span></div>
+        <div id="hk"></div>
+        <p class="cap" data-x="cap"></p>
+      </div>
+    </div>
+    <div class="story">
+      <article class="card cp gl g1"><div class="ct"><b class="num"></b><h3 data-x="c1t"></h3><p data-x="c1"></p><p class="ex" data-x="e1"></p></div><div class="ci" id="ci1"></div></article>
+      <article class="card cp"><div class="ct"><b class="num"></b><h3 data-x="c2t"></h3><p data-x="c2"></p></div><div class="ci" id="ci2"></div></article>
+      <article class="card cp gl g2"><div class="ct"><b class="num"></b><h3 data-x="c3t"></h3><p data-x="c3"></p><p class="ex" data-x="e3"></p></div><div class="ci" id="ci3"></div></article>
+      <article class="card cp"><div class="ct"><b class="num"></b><h3 data-x="c4t"></h3><p data-x="c4"></p><p class="ex" data-x="e4"></p></div><div class="ci" id="ci4"></div></article>
+      <article class="card cp gl g4"><div class="ct"><b class="num"></b><h3 data-x="c5t"></h3><p data-x="c5"></p><p class="ex" data-x="e5"></p></div><div class="ci" id="ci5"></div></article>
+    </div>
+    <h2 class="sh"><span class="gt" data-x="play"></span></h2>
+    <div class="games">
+      <button class="card gc gl g1" data-go="1"><i>01</i><b data-x="n1"></b><span data-x="g1"></span></button>
+      <button class="card gc" data-go="2"><i>02</i><b data-x="n2"></b><span data-x="g2"></span></button>
+      <button class="card gc" data-go="4"><i>03</i><b data-x="n4"></b><span data-x="g4"></span></button>
+      <button class="card gc gl g4" data-go="5"><i>04</i><b data-x="n5"></b><span data-x="g5"></span></button>
+      <button class="card gc gl g2" data-go="3"><i>05</i><b data-x="n3"></b><span data-x="g3"></span></button>
+    </div>
+  </section>
+  <section id="p1" hidden></section><section id="p2" hidden></section><section id="p3" hidden></section><section id="p4" hidden></section><section id="p5" hidden></section>
+</main>
+<footer>
+  <img src="brio-logo.svg" alt="Brio Music Studio">
+  <div class="soc">
+    <a href="https://www.instagram.com/brio_musicstudio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://t.me/briomusicstudio" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.tiktok.com/@brio_music_studio_" target="_blank" rel="noopener">TikTok</a>
+  </div>
+  <small>© <span id="yr"></span> Brio Music Studio · <span data-x="au"></span>: <span data-x="nm"></span></small>
+</footer>
+<nav class="dock" aria-label="Menu">
+  <button class="tab" data-go="0"><i>⌂</i><span data-x="n0"></span></button>
+  <button class="tab" data-go="1"><i>1</i><span data-x="n1"></span></button>
+  <button class="tab" data-go="2"><i>2</i><span data-x="n2"></span></button>
+  <button class="tab" data-go="4"><i>3</i><span data-x="n4"></span></button>
+  <button class="tab" data-go="5"><i>4</i><span data-x="n5"></span></button>
+  <button class="tab" data-go="3"><i>5</i><span data-x="n3"></span></button>
+</nav>
+<dialog id="win"><div class="burst"></div><div class="wm">✓</div><h2 id="wt"></h2><p id="wd"></p>
+  <form method="dialog"><button class="btn alt" value="again" data-x="again"></button><button class="btn" value="ok" data-x="ok"></button></form></dialog>
+<div id="cfx" popover="manual"></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const L={
+uk:{n0:'Огляд',n1:'Будиночки клавіш',n2:'Октави',n3:'Нота і клавіша',n4:'Назвіть ноту',n5:'Знайдіть ноту',
+h1:'Клавіатура фортепіано:',h2:'дві групи чорних клавіш',sub:'Уся клавіатура вибудована з одного візерунка, що повторюється. Навчіться бачити в ньому групи по дві й по три чорні клавіші — і будь-яку ноту ви знайдете за лічені секунди.',cta:'Почати з будиночків',cap:'Група з двох і група з трьох чорних клавіш — ваші головні орієнтири',
+c1t:'Дванадцять клавіш — один візерунок',c1:'На клавіатурі чергуються білі й чорні клавіші. Сім білих і п’ять чорних утворюють візерунок із дванадцяти клавіш; далі він просто повторюється вгору й униз.',e1:'Приклад: від однієї ноти ДО до наступної — дванадцять кроків (півтонів), і кожна клавіша, біла чи чорна, — це один крок.',
+c2t:'Чорні клавіші йдуть двома групами',c2:'Чорні клавіші розташовані нерівномірно: спершу група з двох, потім група з трьох. Саме цей нерівний малюнок дає вам орієнтири — без нього всі білі клавіші виглядали б однаково.',
+c3t:'Групи як орієнтири: будиночки',c3:'Уявіть дах над кожною групою. Під низьким дахом із двох чорних клавіш містяться три білі: ДО, РЕ, МІ. Під широким дахом із трьох чорних — чотири білі: ФА, СОЛЬ, ЛЯ, СІ.',e3:'Приклад: РЕ завжди стоїть чітко між двома чорними клавішами, а СОЛЬ — між першою й другою з трьох.',
+c4t:'Знайдіть ДО й ФА — решту за порядком',c4:'ДО — біла клавіша ліворуч від групи з двох чорних. ФА — біла клавіша ліворуч від групи з трьох. Знаючи ці дві ноти, решту ви знайдете, просто рахуючи праворуч за порядком нот.',e4:'Приклад: потрібне МІ? Знайдіть ДО, пройдіть через РЕ — і ви на МІ, одразу праворуч від групи з двох чорних.',
+c5t:'Октави: ті самі групи, інша висота',c5:'Групи чорних клавіш повторюються по всій клавіатурі, але щоразу звучать на іншій висоті. Кожен такий повторюваний відрізок називається октавою.',e5:'Октава — це послідовність нот від ДО до СІ.',
+g1:'Розмістіть дахи й ноти на клавіатурі',g2:'Сім октав: назви та положення нот ДО й ФА',g3:'Знайдіть пари: назва ноти та її клавіша',g4:'Побачте клавішу — назвіть ноту',g5:'Прочитайте назву — знайдіть клавішу',play:'Практика',
+i1:'Перетягніть дахи й ноти на їхні місця або клацніть на елемент, а потім на місце. Орієнтир: ДО — ліворуч від групи з двох, ФА — ліворуч від групи з трьох.',
+i2:'Заповніть усі сім октав: дахи та ноти ДО й ФА. Прокручуйте вбік. Підказка: в кожній октаві той самий візерунок, змінюється лише висота звучання.',
+i3:'Відкривайте картки по дві: назва ноти має знайти свою клавішу на мініатюрі клавіатури.',
+i4:'Подивіться на позначену клавішу й виберіть правильну назву ноти. Спирайтеся на групи чорних клавіш, а не на підрахунок.',
+i5:'Знайдіть на клавіатурі вказану ноту. Сім нот — сім запитань.',
+q4:'Яка це нота?',q5:'Знайдіть ноту',w1:'Усі елементи на своїх місцях.',w2:'Усі сім октав заповнено.',w3:'Усі пари знайдено.',w4:'Усі ноти названо правильно.',w5:'Усі ноти знайдено.',
+tr:'Дахи',tn:'Ноти',win:'Чудова робота',again:'Ще раз',ok:'Далі',easy:'Легко',all:'Усі ноти',moves:'Ходи',au:'Автор',nm:"Мар'яна Вихрист",oct:'октава'},
+ru:{n0:'Обзор',n1:'Домики клавиш',n2:'Октавы',n3:'Нота и клавиша',n4:'Назовите ноту',n5:'Найдите ноту',
+h1:'Клавиатура фортепиано:',h2:'две группы чёрных клавиш',sub:'Вся клавиатура построена на одном повторяющемся рисунке. Научитесь видеть в нём группы из двух и трёх чёрных клавиш — и любую ноту вы найдёте за считаные секунды.',cta:'Начать с домиков',cap:'Группа из двух и группа из трёх чёрных клавиш — ваши главные ориентиры',
+c1t:'Двенадцать клавиш — один рисунок',c1:'На клавиатуре чередуются белые и чёрные клавиши. Семь белых и пять чёрных образуют рисунок из двенадцати клавиш; дальше он просто повторяется вверх и вниз.',e1:'Пример: от одной ноты ДО до следующей — двенадцать шагов (полутонов), и каждая клавиша, белая или чёрная, — это один шаг.',
+c2t:'Чёрные клавиши идут двумя группами',c2:'Чёрные клавиши расположены неравномерно: сначала группа из двух, затем группа из трёх. Именно этот неровный рисунок даёт вам ориентиры — без него все белые клавиши выглядели бы одинаково.',
+c3t:'Группы как ориентиры: домики',c3:'Представьте крышу над каждой группой. Под низкой крышей из двух чёрных клавиш помещаются три белые: ДО, РЕ, МИ. Под широкой крышей из трёх чёрных — четыре белые: ФА, СОЛЬ, ЛЯ, СИ.',e3:'Пример: РЕ всегда стоит строго между двумя чёрными клавишами, а СОЛЬ — между первой и второй из трёх.',
+c4t:'Найдите ДО и ФА — остальное по порядку',c4:'ДО — белая клавиша слева от группы из двух чёрных. ФА — белая клавиша слева от группы из трёх. Зная эти две ноты, остальные вы найдёте, просто считая вправо по порядку нот.',e4:'Пример: нужна нота МИ? Найдите ДО, пройдите через РЕ — и вы на МИ, сразу справа от группы из двух чёрных.',
+c5t:'Октавы: те же группы, другая высота',c5:'Группы чёрных клавиш повторяются по всей клавиатуре, но каждый раз звучат на другой высоте. Каждый такой повторяющийся отрезок называется октавой.',e5:'Октава — это последовательность нот от ДО до СИ.',
+g1:'Разместите крыши и ноты на клавиатуре',g2:'Семь октав: названия и положение нот ДО и ФА',g3:'Найдите пары: название ноты и её клавиша',g4:'Увидьте клавишу — назовите ноту',g5:'Прочитайте название — найдите клавишу',play:'Практика',
+i1:'Перетащите крыши и ноты на их места или нажмите на элемент, а затем на место. Ориентир: ДО — слева от группы из двух, ФА — слева от группы из трёх.',
+i2:'Заполните все семь октав: крыши и ноты ДО и ФА. Прокручивайте вбок. Подсказка: в каждой октаве один и тот же рисунок, меняется только высота звучания.',
+i3:'Открывайте карточки по две: название ноты должно найти свою клавишу на миниатюре клавиатуры.',
+i4:'Посмотрите на отмеченную клавишу и выберите правильное название ноты. Опирайтесь на группы чёрных клавиш, а не на пересчёт.',
+i5:'Найдите на клавиатуре указанную ноту. Семь нот — семь вопросов.',
+q4:'Какая это нота?',q5:'Найдите ноту',w1:'Все элементы на своих местах.',w2:'Все семь октав заполнены.',w3:'Все пары найдены.',w4:'Все ноты названы верно.',w5:'Все ноты найдены.',
+tr:'Крыши',tn:'Ноты',win:'Отличная работа',again:'Ещё раз',ok:'Дальше',easy:'Легко',all:'Все ноты',moves:'Ходы',au:'Автор',nm:'Марьяна Вихрист',oct:'октава'},
+en:{n0:'Overview',n1:'Key Houses',n2:'Octaves',n3:'Note & Key',n4:'Name the note',n5:'Find the note',
+h1:'The piano keyboard:',h2:'two groups of black keys',sub:'The whole keyboard is built from one repeating pattern. Learn to see it as groups of two and three black keys, and you will find any note within seconds.',cta:'Start with the houses',cap:'A group of two and a group of three black keys: your main landmarks',
+c1t:'Twelve keys, one pattern',c1:'White and black keys alternate along the keyboard. Seven white and five black keys form a pattern of twelve keys, and then it simply repeats upward and downward.',e1:'Example: from one DO to the next DO is twelve steps (semitones), and every key, white or black, is exactly one step.',
+c2t:'Black keys come in two groups',c2:'Black keys are not spaced evenly: first a group of two, then a group of three. This uneven pattern gives you your landmarks. Without it, every white key would look the same.',
+c3t:'Groups as landmarks: the houses',c3:'Imagine a roof over each group. Under the low roof of two black keys sit three white keys: DO, RE, MI. Under the wide roof of three black keys sit four white keys: FA, SOL, LA, SI.',e3:'Example: RE always sits exactly between the two black keys, and SOL between the first and second of the three.',
+c4t:'Find DO and FA, then count',c4:'DO is the white key just left of the group of two black keys. FA is the white key just left of the group of three. Once you know these two, you can find the rest by counting to the right in note order.',e4:'Example: need MI? Find DO, step through RE, and you are on MI, immediately right of the group of two black keys.',
+c5t:'Octaves: the same groups, different pitches',c5:'The groups of black keys repeat across the keyboard, but each time at a different pitch. Each of these repeating sections is called an octave.',e5:'An octave is a sequence of notes from DO to SI.',
+g1:'Place the roofs and notes on the keyboard',g2:'Seven octaves: names and the positions of DO and FA',g3:'Match each note name with its key',g4:'See the key, name the note',g5:'Read the name, find the key',play:'Practice',
+i1:'Drag the roofs and notes into place, or click an item and then its spot. Landmark: DO is left of the group of two, FA is left of the group of three.',
+i2:'Fill all seven octaves: roofs and the notes DO and FA. Scroll sideways. Hint: every octave has the same pattern; only the pitch changes.',
+i3:'Flip the cards two at a time: each note name must find its key on the mini keyboard.',
+i4:'Look at the marked key and choose the right note name. Rely on the groups of black keys, not on counting.',
+i5:'Find the requested note on the keyboard. Seven notes, seven questions.',
+q4:'Which note is it?',q5:'Find the note',w1:'Everything is in its place.',w2:'All seven octaves are filled.',w3:'All pairs found.',w4:'Every note named correctly.',w5:'Every note found.',
+tr:'Roofs',tn:'Notes',win:'Well done',again:'Again',ok:'Next',easy:'Easy',all:'All notes',moves:'Moves',au:'Author',nm:'Mariana Vykhryst',oct:'octave'}};
+const NN={uk:['До','Ре','Мі','Фа','Соль','Ля','Сі'],ru:['До','Ре','Ми','Фа','Соль','Ля','Си'],en:['DO','RE','MI','FA','SOL','LA','SI']};
+const ANN={uk:['Велика','Мала','Перша','Друга','Третя','Четверта',"П’ята"],ru:['Большая','Малая','Первая','Вторая','Третья','Четвёртая','Пятая'],en:['Great','Small','One-lined','Two-lined','Three-lined','Four-lined','Five-lined']};
+const SCI=['C2','C3','C4','C5','C6','C7','C8'];
+const AN=[['',.25],['',.5],['',1],['',2],['',4],['',8],['',16]];
+const COL=['#ff8fa3','#ffb27a','#ffe07a','#7fe0b0','#7cc8f7','#a5a2fb','#d29bf5'],RC={2:'#ff8fb8',3:'#9a8cff'};
+const F=[261.63,293.66,329.63,349.23,392,440,493.88];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let lang='uk',T=L.uk;
+try{lang=localStorage.getItem('brio-lang')||(/^ru/.test(navigator.language)?'ru':/^en/.test(navigator.language)?'en':'uk')}catch(e){}
+if(!L[lang])lang='uk';
+
+/* ---------- Sound: layered piano model (detuned strings, inharmonic partials, hammer, room) ---------- */
+let AC,OUT,NZ;
+function ac(){
+  if(!AC){
+    AC=new(window.AudioContext||window.webkitAudioContext)();
+    const comp=AC.createDynamicsCompressor(),wet=AC.createGain(),cv=AC.createConvolver(),n=AC.sampleRate*1.5,b=AC.createBuffer(2,n,AC.sampleRate);
+    for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n)**3}
+    cv.buffer=b;wet.gain.value=.17;OUT=AC.createGain();OUT.gain.value=.9;
+    OUT.connect(comp);OUT.connect(cv);cv.connect(wet);wet.connect(comp);comp.connect(AC.destination);
+    NZ=AC.createBuffer(1,AC.sampleRate*.04,AC.sampleRate);const d=NZ.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length)**2;
+  }
+  if(AC.state==='suspended')AC.resume();
+  return AC;
+}
+function note(f,v=.8,delay=0){
+  try{
+    const a=ac(),t=a.currentTime+delay,dur=f<200?3.4:f<1000?2.6:1.5,g=a.createGain(),lp=a.createBiquadFilter();
+    lp.type='lowpass';lp.frequency.setValueAtTime(Math.min(11000,f*9+1800),t);lp.frequency.exponentialRampToValueAtTime(Math.min(3500,f*3+900),t+dur*.6);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v*.42,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    g.connect(lp);lp.connect(OUT);
+    [1,.6,.42,.24,.15,.09,.05].forEach((amp,i)=>{
+      const n=i+1,fn=f*n*Math.sqrt(1+.0005*n*n);if(fn>12000)return;
+      const boost=f<160&&n>1&&n<5?1.7:1;
+      [-1,1].forEach(s=>{
+        const o=a.createOscillator(),pg=a.createGain();
+        o.frequency.value=fn;o.detune.value=s*(.9+n*.35);
+        pg.gain.setValueAtTime(amp*boost/2,t);pg.gain.exponentialRampToValueAtTime(.0001,t+dur/(1+i*.6));
+        o.connect(pg);pg.connect(g);o.start(t);o.stop(t+dur+.05);
+      });
+    });
+    const s=a.createBufferSource(),bp=a.createBiquadFilter(),ng=a.createGain();
+    s.buffer=NZ;bp.type='bandpass';bp.frequency.value=Math.min(f*3,3500);ng.gain.value=v*.3;
+    s.connect(bp);bp.connect(ng);ng.connect(OUT);s.start(t);
+  }catch(e){}
+}
+function softTone(frequency,delay=0,duration=.28,volume=.11){
+  const a=ac(),t=a.currentTime+delay,o=a.createOscillator(),g=a.createGain();
+  o.type='sine';o.frequency.setValueAtTime(frequency,t);
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(volume,t+.025);g.gain.exponentialRampToValueAtTime(.0001,t+duration);
+  o.connect(g);g.connect(OUT);o.start(t);o.stop(t+duration+.02);
+}
+const chime=()=>{softTone(659.25);softTone(783.99,.075,.3,.1)};
+const bonk=()=>{softTone(392,.02,.24,.075);softTone(329.63,.09,.26,.065)};
+const fanfare=()=>[523.25,659.25,783.99].forEach((f,i)=>softTone(f,i*.09,.42,.07));
+
+/* ---------- Building blocks ---------- */
+const bub=i=>`<span class="nb" data-nl="${i}" style="--c:${COL[i]};color:#1f1d2b">${NN[lang][i]}</span>`;
+const roof=k=>`<svg class="rf" viewBox="0 0 100 44" preserveAspectRatio="none" style="--c:${RC[k]}" aria-hidden="true"><path class="rb" d="M1 43 13 14Q50-6 87 14L99 43Z"/></svg><b class="dots" aria-hidden="true">${'●'.repeat(k)}</b>`;
+const kb=(c='')=>`<div class="kb ${c}">${[0,1,2,3,4,5,6].map(i=>`<button class="wk" data-k="${i}"></button>`).join('')}${[1,2,4,5,6].map(p=>`<i class="bk" style="--p:${p}"></i>`).join('')}</div>`;
+const mk=(i,c='',labels=false)=>`<span class="mk ${c}" style="--c:${COL[i]||'#fff'}">${[0,1,2,3,4,5,6].map(j=>`<i${j==i?' class="on"':''}>${labels?`<span data-nl="${j}">${NN[lang][j]}</span>`:''}</i>`).join('')}${[1,2,4,5,6].map(p=>`<b style="--p:${p}"></b>`).join('')}</span>`;
+const tok=(t,c,b)=>`<button class="tok ${t[0]=='r'?t:''}" data-t="${t}" ${c?'':'disabled'}>${t[0]=='r'?roof(t[1]):bub(+t[1])}${b&&c?`<em class="bd">${c}</em>`:''}</button>`;
+const head=(n,i)=>`<div class="gh"><div><h2 data-x="${n}"></h2><p data-x="${i}"></p></div><button class="btn sm rst" aria-label="Reset">↺</button></div>`;
+const roofSlots='<div class="roofs"><button class="rs" data-s="r2" style="left:0;width:42.857%">'+roof(2)+'</button><button class="rs" data-s="r3" style="left:42.857%;width:57.143%">'+roof(3)+'</button></div>';
+const ctl={};let cur=null,pg=0;
+
+/* ---------- Drag & drop (pointer events: mouse, touch, pen) + tap-to-place + keyboard ---------- */
+let sel=null,drag=null;
+function clearSel(){sel=null;document.body.classList.remove('arm');$$('.tok.on').forEach(e=>e.classList.remove('on'))}
+function pick(t){const was=sel===t;clearSel();if(!was){sel=t;t.classList.add('on');document.body.classList.add('arm')}}
+function hint(t){$$(`[data-s="${t}"]:not(.full)`).forEach(e=>{e.classList.add('hint');setTimeout(()=>e.classList.remove('hint'),1600)})}
+function drop(t,el){
+  const s=el&&el.closest&&el.closest('[data-s]');if(!s||!cur||!cur.drop)return;
+  if(cur.drop(t,s)<0){s.classList.add('shake');setTimeout(()=>s.classList.remove('shake'),450);hint(t);bonk()}
+}
+document.addEventListener('pointerdown',e=>{const t=e.target.closest('.tok');if(!t||t.disabled||e.button>0)return;ac();drag={t,x:e.clientX,y:e.clientY,g:null}});
+document.addEventListener('pointermove',e=>{
+  const d=drag;if(!d)return;
+  if(!d.g){if(Math.hypot(e.clientX-d.x,e.clientY-d.y)<8)return;clearSel();d.g=d.t.cloneNode(true);d.g.classList.add('ghost');d.g.classList.remove('on');document.body.append(d.g);d.t.classList.add('lift');document.body.classList.add('arm')}
+  d.g.style.translate=`${e.clientX}px ${e.clientY}px`;
+});
+document.addEventListener('pointerup',e=>{
+  const d=drag;drag=null;if(!d)return;
+  if(d.g){d.g.remove();d.t.classList.remove('lift');document.body.classList.remove('arm');drop(d.t.dataset.t,document.elementFromPoint(e.clientX,e.clientY))}
+  else pick(d.t);
+});
+document.addEventListener('pointercancel',()=>{if(drag){if(drag.g)drag.g.remove();drag.t.classList.remove('lift');drag=null;document.body.classList.remove('arm')}});
+function press(k){
+  const i=+k.dataset.k,c=k.closest('.oc');note(F[i]*(c?AN[+c.dataset.o][1]:1));
+  k.animate([{background:COL[i],translate:'0 4px'},{background:'#fff',translate:'0 0'}],{duration:380});
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(g)return go(+g.dataset.go);
+  const l=e.target.closest('[data-l]');if(l)return setLang(l.dataset.l);
+  const tk=e.target.closest('.tok');if(tk){if(e.detail===0&&!tk.disabled)pick(tk);return}
+  if(e.target.closest('.rst'))return cur&&cur.reset&&cur.reset();
+  const a=e.target.closest('[data-sc]');if(a){const s=$('.sc');s.scrollBy({left:a.dataset.sc*s.clientWidth*.7,behavior:reduce?'auto':'smooth'});return}
+  const k=e.target.closest('.wk,.rs');if(!k)return;
+  if(sel&&k.dataset.s){const t=sel.dataset.t;clearSel();drop(t,k);return}
+  if(k.classList.contains('wk'))press(k);
+});
+
+/* ---------- Win celebration ---------- */
+function confetti(){
+  if(reduce)return;const box=$('#cfx');box.innerHTML='';
+  for(let i=0;i<34;i++){
+    const s=document.createElement('i');s.className='cf';s.textContent=['♪','♫','●'][i%5];
+    s.style.cssText=`left:${Math.random()*100}%;color:${COL[i%7]};font-size:${14+Math.random()*24}px`;box.append(s);
+    s.animate([{translate:'0 -10vh',rotate:'0deg'},{translate:`${Math.random()*160-80}px 112vh`,rotate:`${Math.random()*720-360}deg`}],{duration:2400+Math.random()*1800,delay:Math.random()*600,easing:'cubic-bezier(.3,.5,.6,1)',fill:'backwards'});
+  }
+  if(box.showPopover){try{box.showPopover()}catch(e){}setTimeout(()=>{try{box.hidePopover()}catch(e){}},5200)}
+}
+function win(key){
+  const d=$('#win');if(d.open)return;
+  $('#wt').textContent=T.win;$('#wd').textContent=T[key];d.returnValue='';d.showModal();fanfare();confetti();
+}
+$('#win').addEventListener('close',()=>{if($('#win').returnValue==='again'&&cur&&cur.reset)cur.reset()});
+
+/* ---------- Game 1: Note Houses ---------- */
+function b1(el){
+  const S={r2:0,r3:0,n:Array(7).fill(0)};
+  el.innerHTML=head('n1','i1')+`<div class="card tray gl g2"></div><div class="card board gl g1">${roofSlots}${kb()}</div>`;
+  $$('.wk',el).forEach((k,i)=>k.dataset.s='n'+i);
+  const tray=()=>{$('.tray',el).innerHTML=`<div class="grp"><small data-x="tr"></small>${['r2','r3'].map(t=>tok(t,S[t]?0:1)).join('')}</div><div class="grp"><small data-x="tn"></small>${S.n.map((v,i)=>tok('n'+i,v?0:1)).join('')}</div>`;applyLang()};
+  ctl[1]={
+    drop(t,s){
+      if(s.classList.contains('full'))return 0;if(s.dataset.s!==t)return -1;
+      s.classList.add('full');
+      if(t[0]=='r'){S[t]=1;chime()}else{const i=+t[1];S.n[i]=1;s.insertAdjacentHTML('beforeend',bub(i));note(F[i])}
+      tray();if(S.r2&&S.r3&&S.n.every(Boolean))setTimeout(()=>win('w1'),700);return 1;
+    },
+    reset:()=>b1(el)
+  };
+  cur=ctl[1];tray();
+}
+
+/* ---------- Game 2: Octave Zoo ---------- */
+function b2(el){
+  const S=AN.map(()=>({r2:0,r3:0,n0:0,n3:0})),rem=t=>7-S.filter(o=>o[t]).length;
+  el.innerHTML=head('n2','i2')+`<div class="card tray gl g2"></div><div class="nv"><button class="btn sm alt" data-sc="-1" aria-label="←">‹</button><button class="btn sm alt" data-sc="1" aria-label="→">›</button></div><div class="sc">${AN.map((a,i)=>`<article class="card oc" data-o="${i}"><div class="oh"><h3 data-an="${i}"></h3><span class="sci">${SCI[i]}</span></div>${roofSlots}${kb()}</article>`).join('')}</div>`;
+  $$('.oc',el).forEach(c=>[0,3].forEach(i=>c.querySelectorAll('.wk')[i].dataset.s='n'+i));
+  const tray=()=>{$('.tray',el).innerHTML=`<div class="grp"><small data-x="tr"></small>${['r2','r3'].map(t=>tok(t,rem(t),1)).join('')}</div><div class="grp"><small data-x="tn"></small>${['n0','n3'].map(t=>tok(t,rem(t),1)).join('')}</div>`;applyLang()};
+  const center=c=>{const s=c.parentElement;s.scrollTo({left:c.offsetLeft-(s.clientWidth-c.offsetWidth)/2,behavior:reduce?'auto':'smooth'})};
+  ctl[2]={
+    drop(t,s){
+      if(s.classList.contains('full'))return 0;if(s.dataset.s!==t)return -1;
+      const c=s.closest('.oc'),oi=+c.dataset.o,o=S[oi];s.classList.add('full');o[t]=1;
+      if(t[0]=='r')chime();else{s.insertAdjacentHTML('beforeend',bub(+t[1]));note(F[+t[1]]*AN[oi][1])}
+      tray();
+      if(o.r2&&o.r3&&o.n0&&o.n3){
+        c.classList.add('done');const nx=$$('.oc',el).find(x=>!x.classList.contains('done'));
+        if(nx)setTimeout(()=>center(nx),500);else setTimeout(()=>win('w2'),700);
+      }
+      return 1;
+    },
+    reset:()=>b2(el)
+  };
+  cur=ctl[2];tray();
+}
+
+/* ---------- Game 3: Key Memo ---------- */
+function b3(el,n=4){
+  const ids=[0,1,2,3,4,5,6].sort(()=>Math.random()-.5).slice(0,n),cs=ids.flatMap(i=>[[i,0],[i,1]]).sort(()=>Math.random()-.5);
+  let first=null,lock=0,mv=0,found=0;
+  el.innerHTML=head('n3','i3')+`<div class="bar"><div class="seg">${[[4,'easy'],[7,'all']].map(([m,k])=>`<button class="btn sm${m==n?'':' alt'}" data-m="${m}" data-x="${k}"></button>`).join('')}</div><b class="mv"><span data-x="moves"></span>: <span id="mvn">0</span></b></div><div class="mg">${cs.map(([i,k])=>`<button class="mc" data-n="${i}"><span class="mi"><span class="fa">♪</span><span class="fb">${k?mk(i):bub(i)}</span></span></button>`).join('')}</div>`;
+  $('.seg',el).onclick=e=>{const b=e.target.closest('[data-m]');if(b)b3(el,+b.dataset.m)};
+  $('.mg',el).onclick=e=>{
+    const c=e.target.closest('.mc');if(!c||lock||c.classList.contains('up'))return;
+    c.classList.add('up');note(F[+c.dataset.n]);
+    if(!first){first=c;return}
+    const a=first;first=null;$('#mvn',el).textContent=++mv;
+    if(a.dataset.n===c.dataset.n){[a,c].forEach(x=>x.classList.add('ok'));chime();if(++found===n)setTimeout(()=>win('w3'),700)}
+    else{a.classList.add('miss');c.classList.add('miss');bonk();lock=1;setTimeout(()=>{a.classList.remove('up','miss');c.classList.remove('up','miss');lock=0},900)}
+  };
+  ctl[3]={reset:()=>b3(el,n)};cur=ctl[3];applyLang();
+}
+
+/* ---------- Games 4 & 5: Which note? / Play the note ---------- */
+const fx=(el,ok)=>{const d=document.createElement('div');d.className='fx '+(ok?'ok':'no');d.innerHTML='<b>'+(ok?'✓':'✕')+'</b>';const bd=$('.board',el);bd.append(d);bd.classList.add(ok?'gok':'gno');setTimeout(()=>{d.remove();bd.classList.remove('gok','gno')},950)};
+const shuf=a=>[...a].sort(()=>Math.random()-.5),pdots=()=>'<div class="pd">'+'<i></i>'.repeat(7)+'</div>';
+function b4(el){
+  const q=shuf([0,1,2,3,4,5,6]);let n=0,lock=0;
+  el.innerHTML=head('n4','i4')+`<div class="card q gl g3"><span data-x="q4"></span></div>${pdots()}<div class="card board gl g1">${kb()}<div class="opts"></div></div>`;
+  const ask=()=>{
+    const c=q[n],o=shuf([c,...shuf([0,1,2,3,4,5,6].filter(x=>x!=c)).slice(0,3)]);
+    $$('.wk',el).forEach((k,i)=>k.classList.toggle('mark',i==c));
+    $('.opts',el).innerHTML=o.map(i=>`<button class="opt" data-n="${i}">${bub(i)}</button>`).join('');lock=0;applyLang();
+  };
+  $('.opts',el).onclick=e=>{
+    const b=e.target.closest('.opt');if(!b||lock)return;const i=+b.dataset.n;
+    if(i===q[n]){lock=1;fx(el,1);b.classList.add('good');chime();note(F[i],.35,.1);$$('.pd i',el)[n].classList.add('on');n++;if(n<7)setTimeout(ask,950);else setTimeout(()=>win('w4'),900)}
+    else{fx(el,0);b.classList.add('bad');bonk()}
+  };
+  ctl[4]={reset:()=>b4(el)};cur=ctl[4];ask();
+}
+function b5(el){
+  const q=shuf([0,1,2,3,4,5,6]);let n=0,lock=0;
+  el.innerHTML=head('n5','i5')+`<div class="card q gl g3"><span data-x="q5"></span>${bub(q[0])}</div>${pdots()}<div class="card board gl g1">${kb()}</div>`;
+  $('.kb',el).addEventListener('click',e=>{
+    const k=e.target.closest('.wk');if(!k||lock)return;const i=+k.dataset.k;
+    if(i===q[n]){lock=1;fx(el,1);chime();$$('.pd i',el)[n].classList.add('on');n++;if(n<7)setTimeout(()=>{$('.q .nb',el).outerHTML=bub(q[n]);lock=0},950);else setTimeout(()=>win('w5'),900)}
+    else fx(el,0);
+  });
+  ctl[5]={reset:()=>b5(el)};cur=ctl[5];applyLang();
+}
+
+/* ---------- Navigation & language ---------- */
+const B=[null,b1,b2,b3,b4,b5],built=[];
+function go(i){
+  clearSel();
+  const sw=()=>{
+    $$('main>section').forEach((s,k)=>s.hidden=k!==i);
+    $$('.tab').forEach(t=>t.setAttribute('aria-current',+t.dataset.go===i?'page':'false'));
+    if(i&&!built[i]){built[i]=1;B[i]($('#p'+i))}
+    pg=i;cur=ctl[i]||null;scrollTo({top:0});applyLang();
+  };
+  document.startViewTransition&&!reduce?document.startViewTransition(sw):sw();
+}
+function applyLang(){
+  T=L[lang];document.documentElement.lang=lang;document.title='Brio · '+T.h1.replace(':','');
+  $$('[data-x]').forEach(e=>e.textContent=T[e.dataset.x]);
+  $$('[data-nl]').forEach(e=>e.textContent=NN[lang][+e.dataset.nl]);
+  $$('[data-an]').forEach(e=>e.textContent=ANN[lang][+e.dataset.an]+' '+T.oct);
+  $$('.wk').forEach(k=>k.setAttribute('aria-label',NN[lang][+k.dataset.k]));
+  $$('.tok').forEach(t=>t.setAttribute('aria-label',t.dataset.t[0]=='r'?T.tr+' '+t.dataset.t[1]:NN[lang][+t.dataset.t[1]]));
+  $$('.rs').forEach(r=>r.setAttribute('aria-label',T.tr+' '+r.dataset.s[1]));
+  
+  $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===lang));
+}
+function setLang(l){lang=l;try{localStorage.setItem('brio-lang',l)}catch(e){}applyLang()}
+
+$('#hk').innerHTML=kb('pk');
+$$('#hk .wk').forEach((k,i)=>k.insertAdjacentHTML('beforeend',bub(i)));
+$('#yr').textContent=new Date().getFullYear();
+const mka=()=>`<span class="mk">${COL.map(c=>`<i style="background:${c}"></i>`).join('')}${[1,2,4,5,6].map(p=>`<b style="--p:${p}"></b>`).join('')}</span>`;
+$('#ci1').innerHTML=mk(-1);$('#ci2').innerHTML=mk(-1,'g');
+$('#ci3').innerHTML=`<div class="rr"><span style="width:42.857%">${roof(2)}</span><span style="width:57.143%">${roof(3)}</span></div>${mka()}`;
+$('#ci4').innerHTML=`<div class="octs">${[0,3].map(i=>`<div>${mk(i,'g')}${bub(i)}</div>`).join('')}</div>`;
+$('#ci5').innerHTML=`<div class="octs">${[1,2,3].map(i=>`<div>${mk(0,'labels',true)}<small>${SCI[i]}</small></div>`).join('')}</div>`;
+go(0);
+</script>
+</body>
+</html>
